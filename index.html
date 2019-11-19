@@ -1,0 +1,497 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        body {
+            margin: 0px;
+            padding: 0px;
+            
+        }
+        .header{
+            width: 100%;
+            height: 100px;
+            background: #038360;
+            margin-top: -10px;
+            overflow: auto;
+        }
+        .header img{
+            
+            height: inherit;
+            float: left;
+            background: #5DBCD2 ;
+
+        }
+        .header h1 {
+            color: aliceblue;
+            text-align: center;
+            margin: 10px;
+
+        }
+        .header h3{
+
+            color: aliceblue;
+            text-align: center;
+            margin-top: 10px;
+
+        }
+
+        .nav{
+            width: 100%;
+            height: 60px;
+            background: rgb(218, 227, 230);
+            margin-top: 0px;
+            padding-top: 10px;
+            padding-bottom: 10px;
+        
+            
+        }
+
+
+         ul{
+            list-style: none;
+            padding: 0px;
+            margin: 0px;
+            text-align: center;
+           display: block;
+
+
+        }
+         ul li{
+            float: left;
+            margin: 10px;
+        }
+         ul li a{
+            width: 130px;
+            color: black;
+            display: block;
+            text-decoration: none;
+            font-size: 20px;
+            text-align: center;
+            padding :5px;
+            border-radius: 5px;
+            font-family: Century Gothic;
+        }
+
+        a:hover{
+            background: #669900;
+
+        }
+         ul li ul{
+            background:rgb(218, 227, 230);
+
+        }
+         li ul li{
+            float: none;
+        }
+         ul li ul{
+            display: none;
+        }
+
+        ul li:hover ul {
+            display: block;
+        }
+
+        .footer{
+            background-color: rgba(0, 0, 0, 0.84);
+            height: 60px;
+            color: #fff;
+            text-align: center;
+            padding-top: 20px;
+            position: relative;
+            bottom: 0;
+            width: 100%;
+        }
+
+        #slider,.wrap,.slide-content {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, Helvetica, sans-serif;
+            width: 100%;
+            height: 60vh;
+            overflow-x: hidden;
+        }
+        .wrap {
+            position: relative;
+        }
+
+        .slide {
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+        }
+
+        .slide1 {
+        background-image: url("https://static.pexels.com/photos/302889/pexels-photo-302889.jpeg");
+        }
+        .slide2 {
+        background-image: url("https://static.pexels.com/photos/302892/pexels-photo-302892.jpeg");
+        }
+        .slide3 {
+        background-image: url("https://static.pexels.com/photos/226633/pexels-photo-226633.jpeg");
+        }
+
+        .slide-content {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+        }
+
+        .slide-content span {
+        font-size: 5rem;
+        color: #fff;
+        }
+
+        .arrow {
+        cursor: pointer;
+        position: absolute;
+        top: 50%;
+        margin-top: -35px;
+        width: 0;
+        height: 0;
+        border-style: solid;
+        }
+
+        #arrow-left {
+        border-width: 30px 40px 30px 0;
+        border-color: transparent #fff transparent transparent;
+        left: 0;
+        margin-left: 30px;
+        }
+
+        #arrow-right {
+        border-width: 30px 0 30px 40px;
+        border-color: transparent transparent transparent #fff;
+        right: 0;
+        margin-right: 30px;
+        }
+
+        :root {
+        --modal-duration: 1s;
+        --modal-color: #428bca;
+        }
+
+
+        .button {
+        background: #428bca;
+        padding: 1em 2em;
+        color: #fff;
+        border: 0;
+        border-radius: 5px;
+        cursor: pointer;
+        }
+
+        .button:hover {
+        background: #3876ac;
+        }
+
+        .modal {
+        display: none;
+        position: fixed;
+        z-index: 1;
+        left: 0;
+        top: 0;
+        height: 100%;
+        width: 100%;
+        overflow: auto;
+        background-color: rgba(0, 0, 0, 0.5);
+        }
+
+        .modal-content {
+        margin: 10% auto;
+        width: 60%;
+        box-shadow: 0 5px 8px 0 rgba(0, 0, 0, 0.2), 0 7px 20px 0 rgba(0, 0, 0, 0.17);
+        animation-name: modalopen;
+        animation-duration: var(--modal-duration);
+        }
+
+        .modal-header h2,
+        .modal-footer h3 {
+        margin: 0;
+        }
+
+        .modal-header {
+        background: var(--modal-color);
+        padding: 15px;
+        color: #fff;
+        border-top-left-radius: 5px;
+        border-top-right-radius: 5px;
+        }
+
+        .modal-body {
+        padding: 10px 20px;
+        background: #fff;
+        }
+
+        .modal-footer {
+        background: var(--modal-color);
+        padding: 10px;
+        color: #fff;
+        text-align: center;
+        border-bottom-left-radius: 5px;
+        border-bottom-right-radius: 5px;
+        }
+
+        .close {
+        color: #ccc;
+        float: right;
+        font-size: 30px;
+        color: #fff;
+        }
+
+        .close:hover,
+        .close:focus {
+        color: #000;
+        text-decoration: none;
+        cursor: pointer;
+        }
+
+        @keyframes modalopen {
+        from {
+            opacity: 0;
+        }
+        to {
+            opacity: 1;
+        }
+    }
+
+    .container {
+        width: 100%;
+        margin: 0 auto;
+        padding: 0px;
+        font-size: 0;
+        text-align: center;
+        background: #000;
+
+      }
+      .grid-item {
+        display: inline-block;
+        width: 200px;
+        height: 400px;
+        font-size: 1rem;
+        vertical-align: top;
+        margin: 5px;
+        padding: 10px;
+      }
+      .msg {
+        background-color: whitesmoke;
+        width: 50%;
+        
+      }
+      .notice {
+        background-color: tomato;
+        width: 20%;
+      }
+      .news {
+        background-color: cornflowerblue;
+        width: 20%;
+      }
+      .contact {
+          width: 45%;
+          height: 150px;
+        background-color: green;
+      }
+      .orange {
+        background-color: orange;
+      }
+
+
+
+
+    </style>
+</head>
+<body>
+    <div class="header">
+        <img src="image1.png" alt="">
+        <h1>Department of Material Science and Engineering</h1>
+        <h3>Rajshahi University of Engineering & Technology
+            </h3>
+        
+    </div>
+    <div class="nav">
+        <ul>
+            <li><a href="#">Home</a></li>
+            <li><a href="#">About us</a>
+                <ul>
+                        <li><a href="#">Academin</a></li>
+                        <li><a href="#">Faculty</a></li>
+                        <li><a href="#">Office & stuff</a></li>
+                        <li><a href="#">Faculties</a></li>
+                        <li><a href="#">Research</a></li>
+                </ul></li>
+            <li><a href="#">Academin</a></li>
+            <li><a href="#">Faculty</a></li>
+            <li><a href="#">Office & stuff</a></li>
+            <li><a href="#">Faculties</a></li>
+            <li><a href="#">Research</a>
+                <ul>
+                    <li><a href="#">Academin</a></li>
+                    <li><a href="#">Faculty</a></li>
+                    
+                    <li><a href="#">Research</a></li>
+            </ul></li>
+        </ul>
+
+    </div>
+    <div class="wrap">
+        <div id="arrow-left" class="arrow"></div>
+        <div id="slider">
+            <div class="slide slide1">
+                <div class="slide-content">
+                <span>Image One</span>
+                </div>
+            </div>
+            <div class="slide slide2">
+                <div class="slide-content">
+                <span>Image Two</span>
+                </div>
+            </div>
+            <div class="slide slide3">
+                <div class="slide-content">
+                <span>Image Three</span>
+                </div>
+            </div>
+        </div>
+        <div id="arrow-right" class="arrow"></div>
+    </div>
+
+    <div class="container">
+            <div class="grid-item msg">
+                    
+                <p align="justify"><img class="pull-left img-rounded" style="margin-right: 5px;" src="http://placehold.it/170x140"alt="" width="87" height="104"></p>
+                <p align="justify"><span style="color: #0000ff;"><strong>Message from VC</strong></span></p>
+                <p style="text-align: justify;" align="justify">Welcome to the RUET website.&nbsp;It is my great pleasure to welcome you to Rajshahi University of Engineering &amp; Technology which is the 2nd oldest prestigious engineering university in Bangladesh.</p>
+                <p style="text-align: justify;">&nbsp;</p>
+                <p>&nbsp;</p>
+               <p align="right"> <button id="modal-btn" class="button">Read More </button></p>
+                        
+            </div>
+            <div class="grid-item notice"><p>notices</p></div>
+            <div class="grid-item news">news and events</div>
+
+            <div class="grid-item contact">contact </div>
+            <div class="grid-item contact">Social Media</div>
+            
+          </div>
+
+    
+    <div id="my-modal" class="modal">
+            <div class="modal-content">
+              <div class="modal-header">
+                <span class="close">&times;</span>
+                <h2>Modal Header</h2>
+              </div>
+              <div class="modal-body">
+                    <p style="text-align: justify;">It is my great pleasure to welcome you to Rajshahi University of Engineering &amp; Technology (RUET), which is the 2<sup>nd</sup>&nbsp;oldest prestigious higher educational engineering university in Bangladesh. This is the newly developed website, which, I hope, will facilitate online exploration about RUET and propel RUET to completely digitalized institute in future.&nbsp;</p>
+                    <p style="text-align: justify;">The institute was founded in 1964 as Rajshahi Engineering College with three faculties and a limited number of students. The name of the institute was turned to Bangladesh Institute of Technology (BIT), Rajshahi in 1986 to enhance the technical education, and finally it was upgraded to the status of a university with the new name Rajshahi University of Engineering &amp; Technology (RUET) in 2003 to improve the technical education and research.</p>
+                    <p style="text-align: justify;">The university is dedicated to excellence in technical education and research in line with its vision. The university is progressing steadily to be a comprehensive university providing various assortments of under-graduate and post-graduate program. &nbsp;&nbsp;</p>
+                    <p style="text-align: justify;">The institute started its journey with 122 students in 1964 and now the number of students has been extended to about 3000. Students are pursuing their higher study and research in the field of engineering and technology with well-equipped modern and updated laboratory facilities. The university community has close interaction and free exchange of knowledge, ideas withthe renowned scholars of home and abroad. National and international seminars are regularly held and organized by the faculty members, students and the staff of our university.</p>
+                    <p style="text-align: justify;">RUET is dedicated to producing quality graduates in line with the national and global needs for the development of the country as well as the world. Our graduates are well-equipped with the necessary skills, competence, knowledge, practical experience and inter-personal skills. They are holding prestigious research and teaching positions at different reputed universities of home and abroad.Hence the aim of RUET is to take good care of the graduates who will be sufficiently able to contribute to the field of engineering and technology.We always look forward to future needs and prepare our students to meet the challenges of globalization, emerging innovation and knowledge-based economy. The graduates of RUET are encouraged to give constant effort to learning to sustain their adaptability and employability. With all these ends in view, RUET has also future plans to extend its academic and research activities through new departments, and research centers. &nbsp;The university has already established collaborative agreement with universities and institutions worldwide to contribute to the development of students, faculty members, and the staff.</p>
+                    <p style="text-align: justify;">So I welcome you to visit our website and university to make your queries, share your valuable ideas and experiences with us and see things by yourselves. Best wishes for you all.</p>
+                    <p style="text-align: justify;">&nbsp;</p>
+                    <p style="text-align: justify;"><a href="../../../../../teacher/EEE/ris86131" target="_blank"><strong>Prof. Dr. Md. Rafiqul Islam Sheikh</strong></a></p>
+                    <p>Vice-Chancellor, RUET</p>
+                    <p><span style="line-height: 1.42857143;">&nbsp;</span></p>
+                    <p>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;</p>
+                    <p>&nbsp;</p>
+                    <p>&nbsp;</p>
+                </div>
+              <div class="modal-footer">
+                <h3>Modal Footer</h3>
+              </div>
+            </div>
+          </div>
+
+
+    <div class="footer">
+            
+                Copyright © Rajshahi University Of Engineering And Technology 2019
+        
+    </div>
+    <script>
+        let sliderImages = document.querySelectorAll(".slide"),
+        arrowLeft = document.querySelector("#arrow-left"),
+        arrowRight = document.querySelector("#arrow-right"),
+        current = 0;
+
+        // Clear all images
+        function reset() {
+        for (let i = 0; i < sliderImages.length; i++) {
+            sliderImages[i].style.display = "none";
+        }
+        }
+
+        // Init slider
+        function startSlide() {
+        reset();
+        sliderImages[0].style.display = "block";
+        }
+
+        // Show prev
+        function slideLeft() {
+        reset();
+        sliderImages[current - 1].style.display = "block";
+        current--;
+        }
+
+        // Show next
+        function slideRight() {
+        reset();
+        sliderImages[current + 1].style.display = "block";
+        current++;
+        }
+
+        // Left arrow click
+        arrowLeft.addEventListener("click", function() {
+        if (current === 0) {
+            current = sliderImages.length;
+        }
+        slideLeft();
+        });
+
+        // Right arrow click
+        arrowRight.addEventListener("click", function() {
+        if (current === sliderImages.length - 1) {
+            current = -1;
+        }
+        slideRight();
+        });
+
+        startSlide();
+
+        const modal = document.querySelector('#my-modal');
+        const modalBtn = document.querySelector('#modal-btn');
+        const closeBtn = document.querySelector('.close');
+
+        // Events
+        modalBtn.addEventListener('click', openModal);
+        closeBtn.addEventListener('click', closeModal);
+        window.addEventListener('click', outsideClick);
+
+        // Open
+        function openModal() {
+        modal.style.display = 'block';
+        }
+
+        // Close
+        function closeModal() {
+        modal.style.display = 'none';
+        }
+
+        // Close If Outside Click
+        function outsideClick(e) {
+        if (e.target == modal) {
+            modal.style.display = 'none';
+        }
+        }
+
+    </script>
+
+    
+</body>
+</html>
